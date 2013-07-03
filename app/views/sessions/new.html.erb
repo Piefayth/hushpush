@@ -1,0 +1,14 @@
+<% provide(:title, "Sign in") %>
+<h1>Sign In</h1>
+<%= form_for(:session, url: sessions_path) do |f| %>
+	<%#= render 'shared/errors' %>
+	<%= f.label :email %>
+	<%= f.text_field :email %>
+
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+
+	<%= f.submit "Sign In" %>
+<% end %>
+
+<p>New user? <%= link_to "Sign up!", signup_path %></p>
