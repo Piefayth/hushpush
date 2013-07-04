@@ -1,2 +1,14 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<% if signed_in? %>
+	<%= current_user.name %>'s Homepage.
+<% else %>
+	Welcome to HushPush. <%= link_to "Create an account", signup_path %> or <%= link_to "log in", signin_path %> to get started!
+<% end %>
+
+<%#= current_user.widgets[0..-2] if signed_in? %>
+<p>
+<% if signed_in? %>
+	<% for i in 0 .. current_user.widgets.length-2 %>
+		<p><%= current_user.widgets[i].name %></p>
+	<% end %>
+<% end %>
+</p>

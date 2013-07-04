@@ -1,0 +1,18 @@
+<ul class="dropdown-menu">
+	<% if signed_in? %>
+		<%= form_for @widget, html: {id: "target"} do |f| %>
+			<% widget_types.each do |name| %>
+				<li class="addwidget">
+					<a class=<%= name %>>
+						<%= f.label name %>
+					</a>
+				</li> 
+			<% end %>
+			<%= f.hidden_field :name %>
+			<%= f.hidden_field :properties, value: default_properties %>
+		<% end %>
+	<% else %>
+		<li><a href='#'>Sign Up</a></li>
+		<li><a href='#'>To Add Widgets!</a></li>
+	<% end %>
+</ul>

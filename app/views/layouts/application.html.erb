@@ -2,10 +2,20 @@
 <html>
 	<head>
 		<title><%= full_title(yield(:title)) %></title>
-		<%= stylesheet_link_tag    "application", :media => "all" %>
 		<%= javascript_include_tag "application" %>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		
 		<%= csrf_meta_tags %>
 		<link href="assests/css/bootstrap-responsive.css" rel="stylesheet">
+		<script>
+		    $(document).ready(function(){
+		    	$('.addwidget').click(function(){
+		    		var name = $(this).children('a')[0].className;
+		    		$('#widget_name').attr("value", name);
+			    	$('#target').trigger("submit.rails");
+			    });
+		    });
+		</script>
 	</head>
 	<body class="content">
 	<% flash.each do |k, v| %>
