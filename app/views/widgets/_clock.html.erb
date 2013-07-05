@@ -1,0 +1,25 @@
+<div class="navbar">
+	<div class="navbar-inner widget_navbar">
+		<strong class="widget_name"><%= widget.name %></strong>
+		<%= link_to '<i class="icon-remove"> </i>'.html_safe, widget, method: :delete, class: "pull-right" %>
+		<a class="pull-right delete" href='#widget_settings_<%= widget.id %>' data-toggle="modal"><i class="icon-wrench"> </i></a>
+	</div>
+</div>
+<div class="widget clock well well-large">
+</div>
+<div id="widget_settings_<%= widget.id %>" class="modal fade">
+	<div class= "modal-header">
+		<a class="close" data-dismiss="modal"> <i class="icon-remove"> </i></a>
+		<h3><%= widget.name %> Settings</h3>
+	</div>
+	<div class="modal-body">
+		<p>Test</p>
+		<%= form_for @widget do %>
+			<!--stuff-->
+		<% end %>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<a href="#" class="btn btn-primary">Save Changes</a>
+	</div>
+</div>

@@ -13,7 +13,10 @@ class WidgetsController < ApplicationController
 	end
 
 	def destroy
-		@widget.destroy
+		@widget = Widget.find(params[:id])
+		unless @widget.blank?
+			@widget.destroy
+		end
 		redirect_to root_url
 	end
 end

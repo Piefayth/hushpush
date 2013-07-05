@@ -16,3 +16,21 @@
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
 }
+
+.navbar .widget_navbar{
+	min-height: 20px;
+	padding-right: 10px;
+}
+.delete{
+	margin-right: 5px;
+}
+.widget{
+	margin-top: -20px;
+	padding: none;
+}
+.widget_name{
+	margin-left: -10px;
+}
+.icon-remove{
+	margin-top: 100px;
+}

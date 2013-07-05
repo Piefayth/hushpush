@@ -1,0 +1,12 @@
+<%= widget.name %>
+
+<% case widget.name %>
+	<% when "Clock" %>
+		<%= render 'widgets/clock', widget: widget %>
+	<% when "Weather" %>
+		<%= render 'widgets/weather', widget: widget %>
+	<% when "RSS" %>
+		<%= render 'widgets/rss', widget: widget %>
+	<% else %>
+		"Widget type not found"
+<% end %>

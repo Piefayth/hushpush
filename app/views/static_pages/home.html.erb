@@ -4,11 +4,19 @@
 	Welcome to HushPush. <%= link_to "Create an account", signup_path %> or <%= link_to "log in", signin_path %> to get started!
 <% end %>
 
-<%#= current_user.widgets[0..-2] if signed_in? %>
-<p>
+
 <% if signed_in? %>
+	<% column_count = 0 %>
 	<% for i in 0 .. current_user.widgets.length-2 %>
-		<p><%= current_user.widgets[i].name %></p>
+		<% if column_count > 3 || i == 0 %>
+			<% if column_count > 3 %> </div> <% end %>
+				<div class="row">
+				<% column_count = 0 %>
+				<div class="span3"><%= render 'widgets/widget_display', widget: current_user.widgets[i] %></div>
+		<% else %>
+				<div class="span3"><%= render 'widgets/widget_display', widget: current_user.widgets[i] %></div>
+		<% end %>
+		<% column_count += 1 %>
 	<% end %>
+		</div>
 <% end %>
-</p>
