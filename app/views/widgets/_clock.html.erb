@@ -1,12 +1,18 @@
-<div class="navbar">
-	<div class="navbar-inner widget_navbar">
+<%= render 'widgets/widget_style', widget: widget %>
+
+<div class="navbar" id="widget-<%= widget.id %>-navbar">
+	<div class="navbar-inner widget_navbar" id="widget-<%= widget.id %>-navbar-inner">
 		<strong class="widget_name"><%= widget.name %></strong>
 		<%= link_to '<i class="icon-remove"> </i>'.html_safe, widget, method: :delete, class: "pull-right" %>
 		<a class="pull-right delete" href='#widget_settings_<%= widget.id %>' data-toggle="modal"><i class="icon-wrench"> </i></a>
 	</div>
 </div>
-<div class="widget clock well well-large">
+<div class="widget clock well well-large" id="widget-<%= widget.id %>-well">
 </div>
+
+
+
+<!-- Settings Popup -->
 <div id="widget_settings_<%= widget.id %>" class="modal fade">
 	<div class= "modal-header">
 		<a class="close" data-dismiss="modal"> <i class="icon-remove"> </i></a>
