@@ -19,4 +19,12 @@ class WidgetsController < ApplicationController
 		end
 		redirect_to root_url
 	end
+
+	def update
+		@widget = Widget.find(params[:id])
+
+		@widget.properties = params.except(:utf8, :_method, :authenticity_token, :commit, :action, :controller, :id).as_json
+		@widget.save
+		redirect_to root_url
+	end
 end

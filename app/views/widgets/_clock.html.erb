@@ -13,13 +13,14 @@
 		<h3><%= widget.name %> Settings</h3>
 	</div>
 	<div class="modal-body">
-		<p>Test</p>
-		<%= form_for @widget do %>
-			<!--stuff-->
-		<% end %>
+
+		<%= form_tag( {controller: 'widgets', action: 'update', id: widget.id} , {method: :put}) do %>
+			Background Color: <%= text_field_tag :background_color %>
+		
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a>
-		<a href="#" class="btn btn-primary">Save Changes</a>
+		<%= submit_tag "Save Changes", class: "btn btn-primary" %>
+		<% end %>
 	</div>
 </div>

@@ -3,7 +3,7 @@
 		<%= form_for @widget, html: {id: "target"} do |f| %>
 			<% widget_types.each do |name| %>
 				<li class="addwidget">
-					<a class=<%= name %>>
+					<a class="<%= name %>">
 						<%= f.label name %>
 					</a>
 				</li> 

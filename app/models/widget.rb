@@ -1,4 +1,5 @@
 class Widget < ActiveRecord::Base
+  serialize :properties, JSON
   attr_accessible :properties, :name, :user_id
   belongs_to :user
 
