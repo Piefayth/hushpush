@@ -12,4 +12,17 @@ module WidgetsHelper
 		{}
 	end
 
+	def get_weather(widget)
+		unless Rails.cache.fetch("weather#{widget.id}").nil?
+			return Rails.cache.fetch("weather#{widget.id}")
+		else
+			require 'net/http'
+			city = widget.properties["city"]
+			country = widget.properties["country"]
+			url = URI.parse("http://api.openweathermap.org/data/2.5/weather?q=#{city},#{country}&cnt=1&mode=json&APPID=0a0cb68421eaf931257479eaf5a8a29c".to_s)
+			res = Net::HTTP.get_response(url)
+			Rails.cache.write("weather#{widget.id}", res.body, expires_in: 10.minutes)
+			return res.body
+		end
+	end
 end

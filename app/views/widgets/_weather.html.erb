@@ -1,0 +1,2 @@
+<% results = JSON.parse(get_weather(widget)) %>
+<%= results["weather"][0]["main"].to_s %>

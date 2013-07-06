@@ -1,12 +1,24 @@
-<%= widget.name %>
 
-<% case widget.name %>
-	<% when "Clock" %>
-		<%= render 'widgets/clock', widget: widget %>
-	<% when "Weather" %>
-		<%= render 'widgets/weather', widget: widget %>
-	<% when "RSS" %>
-		<%= render 'widgets/rss', widget: widget %>
-	<% else %>
-		"Widget type not found"
-<% end %>
+<%= render 'widgets/widget_style', widget: widget %>
+
+<div class="navbar" id="widget-<%= widget.id %>-navbar">
+	<div class="navbar-inner widget_navbar" id="widget-<%= widget.id %>-navbar-inner">
+		<strong class="widget_name"><%= widget.name %></strong>
+		<%= link_to '<i class="icon-remove"> </i>'.html_safe, widget, method: :delete, class: "pull-right" %>
+		<a class="pull-right delete" href='#widget_settings_<%= widget.id %>' data-toggle="modal"><i class="icon-wrench"> </i></a>
+	</div>
+</div>
+<div class="widget <%= widget.name.downcase %> well well-large" id="widget-<%= widget.id %>-well">
+	<%= render "widgets/#{widget.name.downcase}", widget: widget %>
+</div>
+
+
+
+<!-- Settings Popup -->
+<div id="widget_settings_<%= widget.id %>" class="modal fade">
+	<div class= "modal-header">
+		<a class="close" data-dismiss="modal"> <i class="icon-remove"> </i></a>
+		<h3><%= widget.name %> Settings</h3>
+	</div>
+	<%= render "widgets/#{widget.name.downcase}_settings", widget: widget %>
+</div>
