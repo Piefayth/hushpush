@@ -1,2 +1,31 @@
-<% results = JSON.parse(get_weather(widget)) %>
-<%= results["weather"][0]["main"].to_s %>
+<% unless widget.properties["city"].nil? || widget.properties["country"].nil? %>
+	<% results = JSON.parse(get_current_weather(widget)) %>
+	<h3><%= results["name"] %>,<small> <%= results["sys"]["country"] %></small></h3>
+	<div class="row-fluid weather-content">
+		<div class="span4">
+			<h1><small>Now</small></h1>
+			<span class="center">
+				<img src="http://openweathermap.org/img/w/<%= results["weather"][0]["icon"].to_s %>.png" />
+				<strong><%= results["main"]["temp"].round %> &degF</strong>
+			</span>
+		</div>
+
+		<div class="span4">
+			<% results = JSON.parse(get_forecast_weather(widget)) %>
+			<h1><small>12H</small></h1>
+			<span class="center">
+				<img src="http://openweathermap.org/img/w/<%= results["list"][4]["weather"][0]["icon"].to_s %>.png" />
+				<strong><%= results["list"][4]["main"]["temp"].round %> &degF</strong>
+			</span>
+		</div>
+		<div class="span4">
+			<h1><small>24H</small></h1>
+			<span class="center">
+				<img src="http://openweathermap.org/img/w/<%= results["list"][8]["weather"][0]["icon"].to_s %>.png" />
+				<strong><%= results["list"][8]["main"]["temp"].round %> &degF</strong>
+			</span>
+		</div>
+	</div>
+<% end %>
+<!-- Display current temperature, humidity, high, low for today -->
+<!-- Should grab and cache the forecast, but for longer than 10m -->

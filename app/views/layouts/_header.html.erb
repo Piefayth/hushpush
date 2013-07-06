@@ -1,5 +1,6 @@
 <header>
-	<div class="navbar">
+<div class="row-fluid">
+	<div class="navbar primary">
 		<div class="navbar-inner">
 			<a class="brand" href='/'>HushPush</a>
 			<ul class="nav">
@@ -15,6 +16,9 @@
 				<% end %>
 			</ul>
 			<ul class="nav pull-right">
+				<% if signed_in? %>
+					<li><a>Welcome, <%= current_user.name %>!</a></li>
+				<% end %>
 				<li><a href="#"><i class="icon-wrench"> </i></a></li>
 				<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class=" icon-plus"> </i><b class="caret"></b></a> 
 					<%= render 'widgets/widgets_navbar_list' %>
@@ -22,4 +26,5 @@
 			</ul>
 		</div>
 	</div>
+</div>
 </header>

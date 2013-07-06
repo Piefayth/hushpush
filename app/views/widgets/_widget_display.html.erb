@@ -1,6 +1,7 @@
 
 <%= render 'widgets/widget_style', widget: widget %>
 
+
 <div class="navbar" id="widget-<%= widget.id %>-navbar">
 	<div class="navbar-inner widget_navbar" id="widget-<%= widget.id %>-navbar-inner">
 		<strong class="widget_name"><%= widget.name %></strong>
@@ -9,9 +10,10 @@
 	</div>
 </div>
 <div class="widget <%= widget.name.downcase %> well well-large" id="widget-<%= widget.id %>-well">
-	<%= render "widgets/#{widget.name.downcase}", widget: widget %>
+	<div class="well-content">
+		<%= render "widgets/#{widget.name.downcase}", widget: widget %>
+	</div>
 </div>
-
 
 
 <!-- Settings Popup -->

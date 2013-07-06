@@ -1,5 +1,5 @@
+<div class="page">
 <% if signed_in? %>
-	<%= current_user.name %>'s Homepage.
 <% else %>
 	Welcome to HushPush. <%= link_to "Create an account", signup_path %> or <%= link_to "log in", signin_path %> to get started!
 <% end %>
@@ -10,7 +10,7 @@
 	<% for i in 0 .. current_user.widgets.length-2 %>
 		<% if column_count > 3 || i == 0 %>
 			<% if column_count > 3 %> </div> <% end %>
-				<div class="row">
+				<div class="row-fluid">
 				<% column_count = 0 %>
 				<div class="span3"><%= render 'widgets/widget_display', widget: current_user.widgets[i] %></div>
 		<% else %>
@@ -20,5 +20,5 @@
 	<% end %>
 		</div>
 <% end %>
-
+</div>
       <%= debug(params) if Rails.env.development? %>
