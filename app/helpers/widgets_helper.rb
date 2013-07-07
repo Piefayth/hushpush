@@ -1,7 +1,7 @@
 module WidgetsHelper
 
 	def widget_types
-		return ['Clock', 'Weather', 'RSS', 'ToDo', 'Email', 'Calendar', 'Facebook', 'Twitter']
+		return ['Clock', 'Weather', 'RSS', 'ToDo', 'Gmail', 'Calendar', 'Facebook', 'Twitter']
 	end
 
 	def widget_exists?(widget)
