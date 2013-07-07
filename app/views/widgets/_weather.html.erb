@@ -1,9 +1,9 @@
-<% unless widget.properties["city"].nil? || widget.properties["country"].nil? %>
+<% unless widget.properties["city"].blank? || widget.properties["country"].blank? %>
 	<% temp = get_forecast_weather(widget) %>
 	<% unless temp.nil? %>
 		<% results = JSON.parse(temp)%>
 		<% unless results["list"].nil? %>
-			<h3><%= widget.properties["city"].capitalize %>,<small> <%#= results["sys"]["country"] %> <%= widget.properties["country"].upcase %></small></h3>
+			<h3><%= widget.properties["city"].capitalize %>,<small><%= widget.properties["country"].upcase %></small></h3>
 			<div class="row-fluid weather-content">
 				<div class="span4">
 					<h1><small>Now</small></h1>
@@ -38,5 +38,3 @@
 	<% end %>
 
 <% end %>
-<!-- Display current temperature, humidity, high, low for today -->
-<!-- Should grab and cache the forecast, but for longer than 10m -->

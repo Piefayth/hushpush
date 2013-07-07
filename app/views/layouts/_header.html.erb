@@ -2,7 +2,7 @@
 <div class="row-fluid">
 	<div class="navbar primary">
 		<div class="navbar-inner">
-			<a class="brand" href='/'>HushPush</a>
+			<a class="brand" href='/'>SiteName</a>
 			<ul class="nav">
 				<li class="active"><a href="#"><i class="icon-home"> </i></a></li>
 				<li><a href='/help'>Help</a></li>
@@ -20,7 +20,7 @@
 					<li><a href="#">Welcome, <%= current_user.name %>!</a></li>
 				<% end %>
 				<li><a href="#"><i class="icon-wrench"> </i></a></li>
-					<%= render 'widgets/widgets_navbar_list' %>
+					<%= render 'widgets/widgets_navbar_list' if request.fullpath == '/' %>
 			</ul>
 		</div>
 	</div>

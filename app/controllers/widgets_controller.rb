@@ -29,10 +29,19 @@ class WidgetsController < ApplicationController
 		redirect_to root_url
 	end		
 
+	def page
+		set_rss_page(Widget.find(params[:id]), params[:page])
+		redirect_to root_url
+	end
+
 	private
 
 		def correct_user
 			@widget = current_user.widgets.find_by_id(params[:id])
 			redirect_to root_url if @widget.nil?
+		end
+
+		def set_rss_page(widget, page)
+			Rails.cache.write("feed#{widget.id}", page, expires_in: 10.minutes)
 		end
 end

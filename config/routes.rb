@@ -13,6 +13,11 @@ Hushpush::Application.routes.draw do
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
 
+  resources :widgets do
+    member do
+      get 'page'
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
