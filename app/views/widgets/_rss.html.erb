@@ -1,5 +1,5 @@
 <% unless widget.properties["feed"].blank? %>
-	<div class="rss-content">
+	<div class="rss-content rss-content-<%= widget.id %>">
 	<% feed = get_rss_feed(widget) %>
 	<% unless feed.blank? %>
 	<h1><small><%= feed[0] %></small></h1>

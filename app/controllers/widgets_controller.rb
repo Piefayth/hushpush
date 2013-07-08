@@ -30,8 +30,12 @@ class WidgetsController < ApplicationController
 	end		
 
 	def page
-		set_rss_page(Widget.find(params[:id]), params[:page])
-		redirect_to root_url
+		@widget = Widget.find(params[:id])
+		set_rss_page(@widget, params[:page])
+		respond_to do |format|
+			format.html{ redirect_to root_url }
+			format.js
+		end
 	end
 
 	private
