@@ -10,8 +10,8 @@
 	</div>
 </div>
 <div class="widget <%= widget.name.downcase %> well well-large" id="widget-<%= widget.id %>-well">
-	<div class="well-content">
-		<%= render "widgets/#{widget.name.downcase}", widget: widget %>
+	<div class="well-content" data-widget-name="<%= widget.name.downcase %>" data-widget="widgets/<%= widget.id %>/load">
+		<%#= render "widgets/#{widget.name.downcase}", widget: widget %>
 	</div>
 </div>
 
