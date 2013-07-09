@@ -38,7 +38,7 @@ class WidgetsController < ApplicationController
 	end		
 
 	def load
-		@widget = Widget.find(params[:id])
+		@widget = (Widget.find(params[:id]))
 		respond_to do |format|
 			format.html{ redirect_to root_url }
 			format.js

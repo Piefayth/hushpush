@@ -1,15 +1,3 @@
-for(var i = 0; i < ajaxLoad.length; i+=2){
-	switch(ajaxLoad[ajaxIndex+1]){
-		case "rss":
-			$("#" + ajaxLoad[ajaxIndex] + " .well-content").html("<%= escape_javascript(render 'widgets/rss', widget: @widget) %>");
-			break;
-		case "gmail":
-			$("#" + ajaxLoad[ajaxIndex] + " .well-content").html("<%= escape_javascript(render 'widgets/gmail', widget: @widget) %>");
-			break;
-		default:
-			document.write("dunno bro");
-	}
-	alert(ajaxLoad);
-}
 
-ajaxIndex = ajaxIndex + 2;
+
+$('#widget-<%= @widget.id %>-well .well-content').html('<%= escape_javascript(render "widgets/#{@widget.name.downcase}", widget: @widget) %>');

@@ -26,9 +26,10 @@ class Widget < ActiveRecord::Base
 			imap.disconnect
 			return messages
 		rescue
-			self.properties["gmail_access_token"] = " "
-			self.properties["gmail_refresh_token"] = " "
-			self.properties["gmail_expires_in"] = " "
+			#self.properties["gmail_access_token"] = " "
+			#self.properties["gmail_refresh_token"] = " "
+			#self.properties["gmail_expires_in"] = " "
+			return nil
 			self.save
 		end
 	end

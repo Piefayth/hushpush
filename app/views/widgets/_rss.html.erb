@@ -1,23 +1,29 @@
-<% unless widget.properties["feed"].blank? %>
-	<div class="rss-content rss-content-<%= widget.id %>">
-	<% feed = get_rss_feed(widget) %>
-	<% unless feed.blank? %>
-	<h1><small><%= feed[0] %></small></h1>
-	<% feed[1][0..4].each do |entry| %>
-		<h6><a href= <%= entry.url %> ><%= entry.title %></a></h6>
-		<h5><small>
-		<% unless entry.published.blank? %>
-			<%= time_ago_in_words(entry.published) %> ago.
-		<% else %>
-			No time data.
-		<% end %>
-		</small></h5>
-	<% end %>
-	<%= will_paginate feed[1], params: {controller: :widgets, action: :page, id: widget.id} %>
-	</div>
-	<% else %>
-		<h6><%="Could not load RSS feed." %></h6>
-	<% end %>
+<% if widget.name.downcase != 'rss' %>
+	<%= "#{widget.name} #{widget.id}" %>
 <% else %>
-	<h6>Click the wrench to add a feed!</h6>
+
+	<% unless widget.properties["feed"].blank? %>
+		<div class="rss-content rss-content-<%= widget.id %>">
+		<% feed = get_rss_feed(widget) %>
+		<% unless feed.blank? %>
+		<h1><small><%= feed[0] %></small></h1>
+		<% feed[1][0..4].each do |entry| %>
+			<h6><a href= <%= entry.url %> ><%= entry.title %></a></h6>
+			<h5><small>
+			<% unless entry.published.blank? %>
+				<%= time_ago_in_words(entry.published) %> ago.
+			<% else %>
+				No time data.
+			<% end %>
+			</small></h5>
+		<% end %>
+		<%= will_paginate feed[1], params: {controller: :widgets, action: :page, id: widget.id} %>
+		</div>
+		<% else %>
+			<h6><%="Could not load RSS feed." %></h6>
+		<% end %>
+	<% else %>
+		<h6>Click the wrench to add a feed!</h6>
+	<% end %>
+
 <% end %>
