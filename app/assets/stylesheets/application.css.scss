@@ -95,3 +95,16 @@
 		border-bottom: 1px dotted #333;
 	}
 }
+
+.todo-content{
+	padding-bottom: 30px;
+	.well{
+		max-height: 10px;
+		margin: 0px;
+	}
+	tbody{
+		tr:hover{
+			background-color: #9999FF;
+		}
+	}
+}

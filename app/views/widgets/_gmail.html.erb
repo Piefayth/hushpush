@@ -1,40 +1,34 @@
-<% if widget.name.downcase != 'gmail' %>
-	<%= "#{widget.name} #{widget.id}" %>
-<% else %>
-
-	<% unless widget.properties["gmail_refresh_token"].blank? %>
-		<% unless widget.properties["gmail_address"].blank? %>
-			<div class="gmail-content gmail-content-<%= widget.id %>">
-				<% result = widget.get_gmail %>
-				<% result.each do |mail| %>
-				<h6><a href="http://mail.google.com"><%= mail.subject %> | <%= mail.from[0] %></a></h6>
-				<h5><small><%= time_ago_in_words(mail.date) %></small></h5>
-				<% end %>
-			</div>
-		<% else %>
-			<h6> Confirm your Gmail address.</h6>
-			<%= form_tag({controller: 'widgets', action: 'update', id: widget.id}, {method: :put}) do %>
-				<%= text_field_tag :gmail_address %>
-				<p>
-				<%= submit_tag "Submit", class: "btn" %>
-				</p>
+<% unless widget.widget_preference.gmail_refresh_token.blank? %>
+	<% unless widget.widget_preference.gmail_address.blank? %>
+		<div class="gmail-content gmail-content-<%= widget.id %>">
+			<% result = widget.get_gmail %>
+			<% result.each do |mail| %>
+			<h6><a href="http://mail.google.com"><%= mail.subject %> | <%= mail.from[0] %></a></h6>
+			<h5><small><%= time_ago_in_words(mail.date) %></small></h5>
 			<% end %>
-		<% end %>
+		</div>
 	<% else %>
-	<h6> Enter your Gmail address below. </h6>
-			<%= form_tag "https://accounts.google.com/o/oauth2/auth", method: "get" do %>
-				<%= text_field_tag :login_hint %>
-				<%= hidden_field_tag :response_type, 'code' %>
-				<%= hidden_field_tag :client_id, '948359240643.apps.googleusercontent.com' %>
-				<%= hidden_field_tag :redirect_uri, root_url + 'oauth2callback' %>
-				<%= hidden_field_tag :scope, 'https://mail.google.com/' %>
-				<%= hidden_field_tag :access_type, 'offline' %>
-				<%= hidden_field_tag :state, "#{widget.id}+gmail" %>
-				<%= hidden_field_tag :approval_prompt, "force" %>
-				<p>
-				<%= submit_tag "Submit", class: "btn" %>
-				</p>
-			<% end %>
+		<h6> Confirm your Gmail address.</h6>
+		<%= form_tag({controller: 'widgets', action: 'update', id: widget.id}, {method: :put}) do %>
+			<%= text_field_tag :gmail_address %>
+			<p>
+			<%= submit_tag "Submit", class: "btn" %>
+			</p>
+		<% end %>
 	<% end %>
-
+<% else %>
+<h6> Enter your Gmail address below. </h6>
+		<%= form_tag "https://accounts.google.com/o/oauth2/auth", method: "get" do %>
+			<%= text_field_tag :login_hint %>
+			<%= hidden_field_tag :response_type, 'code' %>
+			<%= hidden_field_tag :client_id, '948359240643.apps.googleusercontent.com' %>
+			<%= hidden_field_tag :redirect_uri, root_url + 'oauth2callback' %>
+			<%= hidden_field_tag :scope, 'https://mail.google.com/' %>
+			<%= hidden_field_tag :access_type, 'offline' %>
+			<%= hidden_field_tag :state, "#{widget.id}+gmail" %>
+			<%= hidden_field_tag :approval_prompt, "force" %>
+			<p>
+			<%= submit_tag "Submit", class: "btn" %>
+			</p>
+		<% end %>
 <% end %>

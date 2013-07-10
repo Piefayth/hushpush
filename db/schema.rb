@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130704184325) do
+ActiveRecord::Schema.define(:version => 20130710013522) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(:version => 20130704184325) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
+  create_table "widget_preferences", :force => true do |t|
+    t.string  "background_color"
+    t.text    "todo_tasks"
+    t.string  "weather_city"
+    t.string  "weather_state"
+    t.string  "rss_feed"
+    t.string  "gmail_access_token"
+    t.string  "gmail_address"
+    t.string  "gmail_refresh_token"
+    t.string  "gmail_expires_in"
+    t.integer "widget_id"
+  end
+
+  add_index "widget_preferences", ["widget_id"], :name => "index_widget_preferences_on_widget_id"
 
   create_table "widgets", :force => true do |t|
     t.string   "name"

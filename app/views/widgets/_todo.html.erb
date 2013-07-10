@@ -1,0 +1,66 @@
+<% unless widget.widget_preference.todo_tasks.blank? %>
+<p></p>
+<div class="todo-content">
+	<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Due Date</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% widget.widget_preference.todo_tasks.each do |task| %>
+		
+		<tr>
+		<td><%= task[1] %></td>
+		<td><%= task[2] %></td>
+		<td><%= link_to "widgets/#{widget.id}/remtask/?task_id=#{task[0]}" do %>
+				<i class='icon-remove'> </i>
+			<% end %>
+		</td>
+		</tr>
+		
+	<% end %>
+	</tbody>
+	</table>
+<% else %>
+<h6>Click the plus to get started!</h6>
+<% end %>
+
+	<div style="padding-top:5px;">
+
+		<a class="pull-right" href='#todo_add_<%= widget.id %>' data-toggle="modal"><i class=" icon-plus"> </i></i></a>
+		<div id="todo_add_<%= widget.id %>" class="modal fade">
+			<div class= "modal-header">
+				<a class="close" data-dismiss="modal"> <i class="icon-remove"> </i></a>
+				<h3>New Task</h3>
+			</div>
+			<div class="modal-body">
+				<%= form_tag( {controller: 'widgets', action: 'update', id: widget.id}, {method: :put, class: "form-horizontal"}) do %>
+					<div class="control-group">
+						<label class="control-label">Task Name: </label>
+						<div class="controls"><%= text_field_tag :task_name %></div>
+						<label class="control-label">Finish by? </label>
+						<div class="controls"><%= text_field_tag :due_date %></div>
+						<% if widget.widget_preference.todo_tasks.blank? %>
+							<% id = 1 %>
+						<% else %>
+							<% id = 0 %>
+							<% widget.widget_preference.todo_tasks.each do |task| %>
+								<% id = task[0].to_i if task[0].to_i > id %>
+							<% end %>
+						<% end %>
+						<%= hidden_field_tag :task_id, "#{id+1}" %>
+					</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">Close</a>
+					<%= submit_tag "Save", class: "btn btn-primary" %>
+				</div>
+							
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+

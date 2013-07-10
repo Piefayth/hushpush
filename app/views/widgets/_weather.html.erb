@@ -1,9 +1,9 @@
-<% unless widget.properties["city"].blank? || widget.properties["country"].blank? %>
+<% unless widget.widget_preference.weather_city.blank? || widget.widget_preference.weather_state.blank? %>
 	<% temp = get_forecast_weather(widget) %>
 	<% unless temp.nil? %>
 		<% results = JSON.parse(temp)%>
 		<% unless results["list"].nil? %>
-			<h3><%= widget.properties["city"].capitalize %>,<small><%= widget.properties["country"].upcase %></small></h3>
+			<h3><%= widget.widget_preference.weather_city.split(' ').map {|w| w.capitalize }.join(' ') %>,<small><%= widget.widget_preference.weather_state.upcase %></small></h3>
 			<div class="row-fluid weather-content">
 				<div class="span4">
 					<h1><small>Now</small></h1>
@@ -30,11 +30,11 @@
 			</div>
 		<% else %>
 			<div class="row-fluid">
-				<div class="span12"><%= "No weather data for #{widget.properties["city"]}, #{widget.properties["country"]}." %></div>
+				<div class="span12"><%= "No weather data for #{widget.widget_preference.weather_city}, #{widget.widget_preference.weather_state}." %></div>
 			</div>
 		<% end %>
 	<% else %>
-		<div class="span12"><%= "No weather data for #{widget.properties["city"]}, #{widget.properties["country"]}." %></div>
+		<div class="span12"><%= "No weather data for #{widget.widget_preference.weather_city}, #{widget.widget_preference.weather_state}." %></div>
 	<% end %>
 
 <% end %>

@@ -3,11 +3,11 @@
 	<%= form_tag( {controller: 'widgets', action: 'update', id: widget.id} , {method: :put, class: "form-horizontal"}) do %>
 		<div class="control-group">
 			<label class="control-label">City </label>
-			<div class="controls"><%= text_field_tag :city, "#{widget.properties["city"]}" %></div>
+			<div class="controls"><%= text_field_tag :weather_city, "#{widget.widget_preference.weather_city}" %></div>
 			<label class="control-label">State / Country </label>
-			<div class="controls"><%= text_field_tag :country, "#{widget.properties["country"]}" %></div>
+			<div class="controls"><%= text_field_tag :weather_state, "#{widget.widget_preference.weather_state}" %></div>
 			<label class="control-label">Background Color: </label>
-			<div class="controls"><%= text_field_tag :background_color, "#{widget.properties["background_color"]}" %> Format: 123456</div>
+			<div class="controls"><%= text_field_tag :background_color, "#{widget.widget_preference.background_color}" %> Format: 123456</div>
 		</div>
 </div>
 <div class="modal-footer">

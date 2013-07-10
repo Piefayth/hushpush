@@ -1,6 +1,7 @@
 class WidgetsController < ApplicationController
 	before_filter :signed_in_user
 	before_filter :correct_user, only: [:destroy, :update]
+	
 
 	def create
 		@widget = current_user.widgets.build(params[:widget])
@@ -23,19 +24,33 @@ class WidgetsController < ApplicationController
 
 	def update
 		@widget = Widget.find(params[:id])
-		temp_properties = @widget.properties
-		@widget.properties = params.except(:utf8, :_method, :authenticity_token, :commit, :action, :controller, :id)
-		unless temp_properties.eql?("{}")
-			temp_properties.each do |key, value|
-				if @widget.properties[key].nil?
-					@widget.properties[key] = value
-				end
+		if params[:task_name].nil?
+			params.except(:utf8, :_method, :authenticity_token, :commit, :action, :controller, :id).each do |key, value|
+				@widget.widget_preference[key] = value
+			end
+		else
+			if @widget.widget_preference.todo_tasks.blank?
+				@widget.widget_preference.todo_tasks = Array.new
+				@widget.widget_preference.todo_tasks.push([params[:task_id], params[:task_name], params[:due_date]])
+			else
+				@widget.widget_preference.todo_tasks.push([params[:task_id], params[:task_name], params[:due_date]])
 			end
 		end
-		@widget.properties = @widget.properties.as_json
 		@widget.save
 		redirect_to root_url
 	end		
+
+	def remtask
+		@widget = Widget.find(params[:id])
+
+		@widget.widget_preference.todo_tasks.each do |task|
+			if task[0].eql?(params[:task_id])
+				@widget.widget_preference.todo_tasks.delete(task)
+			end
+		end
+		@widget.save
+		redirect_to root_url
+	end
 
 	def load
 		@widget = (Widget.find(params[:id]))
@@ -63,7 +78,7 @@ class WidgetsController < ApplicationController
 		if params[:state].include?("gmail")
 			state = params[:state].split("+")
 			@widget = Widget.find(state[0])
-			if @widget.properties["gmail_refresh_token"].blank?
+			if @widget.widget_preference.gmail_refresh_token.blank?
 				if params[:code].include?("error")
 					flash[:error] = params[:code]
 					redirect_to root_url
@@ -76,14 +91,10 @@ class WidgetsController < ApplicationController
 					response = Net::HTTP.start(url.host, use_ssl: true) do |http| http.request(request) end
 					response = JSON.parse(response.body)
 					
-
-					temp_properties = @widget.properties.eql?("{}") ? JSON.parse(@widget.properties) : Hash.new
-
-					temp_properties[:gmail_access_token] = response["access_token"] unless response["access_token"].nil?
-					temp_properties[:gmail_refresh_token] = response["refresh_token"] unless response["access_token"].nil?
-					temp_properties[:gmail_expires_in] = response["expires_in"] unless response["access_token"].nil?
-
-					@widget.properties = temp_properties.as_json
+					@widget.widget_preference.gmail_access_token = response["access_token"]
+					@widget.widget_preference.gmail_refresh_token = response["refresh_token"]
+					@widget.widget_preference.gmail_expires_in = response["expires_in"]
+					
 					@widget.save
 					redirect_to root_url
 				end

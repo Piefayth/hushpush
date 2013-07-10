@@ -13,10 +13,12 @@ Hushpush::Application.routes.draw do
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/oauth2callback', to: 'widgets#oauthcallback'
+
   resources :widgets do
     member do
       get 'page'
       get 'load'
+      get 'remtask'
     end
   end
   # The priority is based upon order of creation:
