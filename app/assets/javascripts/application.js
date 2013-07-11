@@ -15,8 +15,6 @@
 //= require_tree .
 
 var ajaxParams = "";
-var ajaxLoad = new Array();
-var ajaxIndex = 0
 
 $(document).ready(function(){
 	$('.addwidget').click(function(){
