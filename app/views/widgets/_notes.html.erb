@@ -1,0 +1,8 @@
+<p></p>
+<%= form_tag @widget.widget_preference, {remote: true, method: :put, class: "notes-form"} do %>
+<%= text_area_tag :notes, widget.widget_preference.notes, {class: "notes-text"} %>
+<%= submit_tag "Save" %>
+<% end %>
+
+<% unless widget.widget_preference.notes.blank? %>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710013522) do
+ActiveRecord::Schema.define(:version => 20130711173858) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20130710013522) do
     t.string  "gmail_refresh_token"
     t.string  "gmail_expires_in"
     t.integer "widget_id"
+    t.text    "notes"
   end
 
   add_index "widget_preferences", ["widget_id"], :name => "index_widget_preferences_on_widget_id"

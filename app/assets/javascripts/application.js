@@ -17,3 +17,11 @@
 var ajaxParams = "";
 var ajaxLoad = new Array();
 var ajaxIndex = 0
+
+$(document).ready(function(){
+	$('.addwidget').click(function(){
+		var name = $(this).children('a')[0].className;
+		$('#widget_name').attr("value", name);
+    	$('#target').trigger("submit.rails");
+    });
+});

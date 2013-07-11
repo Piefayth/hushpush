@@ -5,6 +5,7 @@ Hushpush::Application.routes.draw do
   resources :users, only: [:new, :create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :widgets, only: [:create, :destroy, :update]
+  resources :widget_preferences, only: [:create, :update]
 
   match '/help', to: 'static_pages#help'
   match '/about', to: 'static_pages#about'

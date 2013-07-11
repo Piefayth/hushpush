@@ -8,15 +8,6 @@
 		
 		<%= csrf_meta_tags %>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		<script>
-		    $(document).ready(function(){
-		    	$('.addwidget').click(function(){
-		    		var name = $(this).children('a')[0].className;
-		    		$('#widget_name').attr("value", name);
-			    	$('#target').trigger("submit.rails");
-			    });
-		    });
-		</script>
 	</head>
 	<body class="content">
 	<% flash.each do |k, v| %>
