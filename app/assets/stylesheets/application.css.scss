@@ -15,6 +15,9 @@
   background-color: #eee;
   //background: url('binding_dark.png');
 }
+textarea{
+	resize: none !important;
+}
 .page{
 	padding: 10px;
 }

@@ -5,8 +5,8 @@ $(document).ready(function(){
 		loadedObject.push($(this))
 		requests.push($.getScript($(this).attr("data-widget")));
 	});
-	var defer = $.when.apply($, requests);
-	defer.done(function(){
+
+	$.when.apply($, requests).done(function(){
 		$.each(loadedObject, function(index, value){
 			bindNote(value);
 			//Add additional things that need bound here.
